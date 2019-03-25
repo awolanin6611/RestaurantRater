@@ -50,8 +50,17 @@ namespace RestaurantRater.Controllers
             return View(restaurant);
 
         }
-
         //POST: Restaurant/Delete/Id
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Restaurant restaurant = db.Restaurants.Find(id);
+            db.Restaurants.Remove(restaurant);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
     }
 }
